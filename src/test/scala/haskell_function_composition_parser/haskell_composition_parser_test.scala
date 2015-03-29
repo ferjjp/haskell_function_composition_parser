@@ -34,6 +34,9 @@ class haskell_composition_parser_test extends FreeSpec with ParserTest[HaskellCo
      """funcionA ble . funcionB bli""" should beParsedTo(Composition(Function("funcionA",List(Argument("ble"))),Function("funcionB",List(Argument("bli")))))(composition)
    }
    
+   "should parse a function composition, between a named function with arguments, and an anonymous function" in {
+     """functionA bla ble . (\x -> ble)""" should beParsedTo(Composition(Function("functionA",List(Argument("bla"),Argument("ble"))),Function("",List(Argument("x")))))(composition)
+   }
    
    
  }

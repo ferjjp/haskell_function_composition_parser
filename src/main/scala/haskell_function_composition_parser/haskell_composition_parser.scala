@@ -15,7 +15,7 @@ trait HaskellCompositionParser extends RegexParsers {
   lazy protected val commentSkipper = "-{2,}(.*)$".r
   lazy protected val function = normalFunction | anonymousFunction
   lazy protected val normalFunction = identifier ~ mayBeBetweenParentesis(repsep(argument,"")) ^^ { case id ~ arguments => Function(id, arguments) }
-  lazy protected val anonymousFunction = mayBeBetweenParentesis("\\" ~> repsep(argument,"") <~ "->" <~ functionBody) ^^ {case arguments => Function("",arguments)}
+  lazy protected val anonymousFunction = mayBeBetweenParentesis("\\" ~> repsep(argument,""  ) <~ "->" <~ functionBody) ^^ {case arguments => Function("",arguments)}
   lazy protected val argument = identifier ^^ { r => Argument(r) }
   lazy protected val identifier = """[A-Za-z]+""".r
   lazy protected val functionBody = identifier.+
