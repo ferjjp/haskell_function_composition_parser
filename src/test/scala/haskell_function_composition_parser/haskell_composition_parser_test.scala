@@ -18,6 +18,10 @@ class haskell_composition_parser_test extends FreeSpec with ParserTest[HaskellCo
      """functionA(bla)""" should beParsedTo(Function("functionA",List(Argument("bla"))))(function)
    }
    
+   "should parse an anonymous function" in {
+     """\x y -> ble""" should beParsedTo(Function("",List(Argument("x"),Argument("y"))))(function)
+   }
+   
  }
   
   "should parse compositions" - {
