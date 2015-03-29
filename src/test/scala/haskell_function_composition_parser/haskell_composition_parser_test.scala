@@ -14,6 +14,10 @@ class haskell_composition_parser_test extends FreeSpec with ParserTest[HaskellCo
      """functionA bla ble bli""" should beParsedTo(Function("functionA",List(Argument("bla"),Argument("ble"),Argument("bli"))))(function)
    }
    
+   "should parse a function that uses parentesis" in {
+     """functionA(bla)""" should beParsedTo(Function("functionA",List(Argument("bla"))))(function)
+   }
+   
  }
   
   "should parse compositions" - {
@@ -25,6 +29,8 @@ class haskell_composition_parser_test extends FreeSpec with ParserTest[HaskellCo
    "should parse a function composition, both with arguments" in {
      """funcionA ble . funcionB bli""" should beParsedTo(Composition(Function("funcionA",List(Argument("ble"))),Function("funcionB",List(Argument("bli")))))(composition)
    }
+   
+   
    
  }
 }
