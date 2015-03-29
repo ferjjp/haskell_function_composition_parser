@@ -17,11 +17,14 @@ class haskell_composition_parser_test extends FreeSpec with ParserTest[HaskellCo
  }
   
   "should parse compositions" - {
+    
    "should parse a simple composition" in {
      """funcionA.funcionB""" should beParsedTo(Composition(Function("funcionA",Nil),Function("funcionB",Nil)))(composition)
    }
    
-   
+   "should parse a function composition, both with arguments" in {
+     """funcionA ble . funcionB bli""" should beParsedTo(Composition(Function("funcionA",List(Argument("ble"))),Function("funcionB",List(Argument("bli")))))(composition)
+   }
    
  }
 }
