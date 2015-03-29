@@ -4,11 +4,17 @@ import org.scalatest.FreeSpec
 
 
 class haskell_composition_parser_test extends FreeSpec with ParserTest[HaskellCompositionParser] with HaskellCompositionParser {
- implicit val parser: Parser[Composition] = composition_parser
+  "should parse functions" - { 
+   "should parse a simple function" in {
+     """functionA""" should beParsedTo(Function("functionA",Nil))(function)
+   }
+ }
   "should parse compositions" - {
    "should parse a simple composition" in {
-     """funcionA.funcionB""" should beParsedTo(Composition(Function("funcionA",Nil),Function("funcionB",Nil)))
+     """funcionA.funcionB""" should beParsedTo(Composition(Function("funcionA",Nil),Function("funcionB",Nil)))(composition)
    }
+   
+   
    
  }
 }

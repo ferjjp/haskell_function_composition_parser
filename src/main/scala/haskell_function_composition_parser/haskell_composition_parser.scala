@@ -10,7 +10,7 @@ trait HaskellCompositionParser extends RegexParsers {
   case class Function(id: String,arguments: List[Argument])
   case class Argument(id: String)
   
-  lazy protected val composition_parser = (function <~ ".") ~ function ^^ {case funcion ~ funcion1 => Composition(funcion,funcion1)}
+  lazy protected val composition = (function <~ ".") ~ function ^^ {case funcion ~ funcion1 => Composition(funcion,funcion1)}
   lazy protected val commentSkipper = "-{2,}(.*)$".r
   lazy protected val function = identifier ~ repsep(argument," ") ^^ {case id ~ arguments => Function(id,arguments)}
   lazy protected val argument = identifier ^^ { r => Argument(r)}
